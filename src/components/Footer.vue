@@ -11,7 +11,9 @@ export default {
 }
 </script>
 <style>
-.footer-style{
-    color: #fff
+.footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 </style>

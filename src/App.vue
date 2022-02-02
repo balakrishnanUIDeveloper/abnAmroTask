@@ -1,15 +1,18 @@
 <template>
   <Header title="TV SHOWS" />
+  <ListView />
   <Footer />
 </template>
 
 <script>
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
+import ListView from './components/ListView.vue';
 export default {
   name: 'App',
   components: {
     Header,
+    ListView,
     Footer
   }
 }
