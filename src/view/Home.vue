@@ -1,30 +1,23 @@
 <template>
-  <Header @submit-search="submitSearch" title="TV SHOWS" />
-  <router-view></router-view>
-  <Footer />
+  <ErrorView :error="errorMessage" v-if="showError" />
+  <ListView :shows="shows" @show-details="showDetail" v-if="!showError" />
 </template>
-
 <script>
-import Header from "./components/Header.vue";
-import Footer from "./components/Footer.vue";
+import ListView from "../components/ListView.vue";
+import ErrorView from "../components/ErrorView.vue";
 export default {
-  name: "App",
+  name: "Home",
   components: {
-    Header,
-    // ListView,
-    Footer,
-    // ErrorView,
+    ListView,
+    ErrorView,
   },
   methods: {
     showDetail(id) {
       console.log("check id", id);
+      this.$router.push({ name: 'show', params: { id: id } })
     },
-    submitSearch(id) {
-      console.log("check submit", id);
-      this.searchTvShow(id);
-    },
-    searchTvShow(id) {
-     fetch(` https://api.tvmaze.com/search/shows?q=${id}`)
+    fetchTVShows() {
+      fetch("https://api.tvmaze.com/shows?page=1")
         .then(async (response) => {
           this.showError = false;
           const data = await response.json();
@@ -36,7 +29,7 @@ export default {
             return Promise.reject(error);
           }
           if (data && data.length > 0) {
-            this.shows = data.map(i=>i.show);
+            this.shows = data;
           }
         })
         .catch((error) => {
@@ -45,16 +38,16 @@ export default {
           console.error("There was an error!", error);
         });
     },
-  }
+  },
+  created() {
+    this.fetchTVShows();
+  },
+  data() {
+    return {
+      shows: Array,
+      errorMessage: "",
+      showError: false,
+    };
+  },
 };
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-</style>
