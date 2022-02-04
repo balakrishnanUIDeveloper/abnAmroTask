@@ -47,7 +47,7 @@ export default {
   },
   data() {
     return {
-      shows: Array,
+      shows: [],
       errorMessage: "",
       showError: false,
     };

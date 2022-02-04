@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container show-detail">
     <div class="row">
       <div class="col">
         <h3 class="card-title text-center">{{ showItem.name }}</h3>
@@ -8,102 +8,30 @@
           <div class="col-lg-5 col-md-5 col-sm-6">
             <div class="white-box text-center">
               <img
-                :src="showItem?.image?.original || require('../assets/No_Image_Available.jpg')"
+                alt="image"
+                v-bind:src="showItem?.image?.original || img_thumbnail"
                 class="img-responsive img-thumbnail"
               />
             </div>
           </div>
           <div class="col-lg-7 col-md-7 col-sm-6 text-left">
-            <h4 class="box-title mt-5">
-              Genre: {{ showItem.genres.join("/ ") }}
-            </h4>
+            <h6 class="box-title mt-5">
+              <strong
+                >Genre:
+                {{ showItem?.genres && showItem.genres.join("/ ") }}</strong
+              >
+            </h6>
             <p>
-              {{ showItem.summary }}
+              {{ showItem.summary || desc }}
             </p>
-            <h3 class="box-title mt-5">Key Highlights</h3>
+            <h6 class="box-title mt-5 underlined">
+              <strong>Show Details</strong>
+            </h6>
             <ul class="list-unstyled">
-              <li><i class="fa fa-check text-success"></i>Sturdy structure</li>
-              <li>
-                <i class="fa fa-check text-success"></i>Designed to foster easy
-                portability
-              </li>
-              <li>
-                <i class="fa fa-check text-success"></i>Perfect furniture to
-                flaunt your wonderful collectibles
-              </li>
+              <li>Premiered: {{ showItem?.premiered }}</li>
+              <li>Runtime: {{ showItem?.runtime }}</li>
+              <li>Status: {{ showItem?.status }}</li>
             </ul>
-          </div>
-          <div class="col-lg-12 col-md-12 col-sm-12">
-            <h3 class="box-title mt-5">General Info</h3>
-            <div class="table-responsive">
-              <table class="table table-striped table-product">
-                <tbody>
-                  <tr>
-                    <td width="390">Brand</td>
-                    <td>Stellar</td>
-                  </tr>
-                  <tr>
-                    <td>Delivery Condition</td>
-                    <td>Knock Down</td>
-                  </tr>
-                  <tr>
-                    <td>Seat Lock Included</td>
-                    <td>Yes</td>
-                  </tr>
-                  <tr>
-                    <td>Type</td>
-                    <td>Office Chair</td>
-                  </tr>
-                  <tr>
-                    <td>Style</td>
-                    <td>Contemporary&amp;Modern</td>
-                  </tr>
-                  <tr>
-                    <td>Wheels Included</td>
-                    <td>Yes</td>
-                  </tr>
-                  <tr>
-                    <td>Upholstery Included</td>
-                    <td>Yes</td>
-                  </tr>
-                  <tr>
-                    <td>Upholstery Type</td>
-                    <td>Cushion</td>
-                  </tr>
-                  <tr>
-                    <td>Head Support</td>
-                    <td>No</td>
-                  </tr>
-                  <tr>
-                    <td>Suitable For</td>
-                    <td>Study&amp;Home Office</td>
-                  </tr>
-                  <tr>
-                    <td>Adjustable Height</td>
-                    <td>Yes</td>
-                  </tr>
-                  <tr>
-                    <td>Model Number</td>
-                    <td>F01020701-00HT744A06</td>
-                  </tr>
-                  <tr>
-                    <td>Armrest Included</td>
-                    <td>Yes</td>
-                  </tr>
-                  <tr>
-                    <td>Care Instructions</td>
-                    <td>
-                      Handle With Care,Keep In Dry Place,Do Not Apply Any
-                      Chemical For Cleaning.
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Finish Type</td>
-                    <td>Matte</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
           </div>
         </div>
       </div>
@@ -111,7 +39,7 @@
   </div>
 </template>
 <script>
-import * as CONST from '../App.constants.js'
+import * as CONST from "../App.constants.js";
 export default {
   name: "ShowDetail",
   data() {
@@ -119,6 +47,8 @@ export default {
       showItem: {},
       showError: false,
       errorMessage: "",
+      desc: "No Decription Available",
+      img_thumbnail: require("../assets/No_Image_Available.jpg"),
     };
   },
   methods: {
@@ -151,3 +81,8 @@ export default {
   },
 };
 </script>
+<style>
+.show-detail {
+  margin-top: 20px;
+}
+</style>
