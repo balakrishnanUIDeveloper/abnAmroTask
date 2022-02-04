@@ -1,7 +1,7 @@
 <template>
-  <div class="p-3 border bg-light">
+  <div class="p-3 border bg-light text-center">
     <a class="show-card" href="javascript:void(0)" @click="showDetails(showItem.id)">
-      <img class="rounded" v-bind:src="showItem?.image?.medium" />
+      <img class="rounded img-fluid" :src="showItem?.image?.medium || require('../assets/No_Image_Thumbnail.jpg')" />
       <span class="show-name">{{ showItem.name }}</span></a
     >
   </div>

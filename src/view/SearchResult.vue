@@ -1,13 +1,13 @@
 <template>
   <ErrorView :error="errorMessage" v-if="showError" />
-  <ListView :shows="shows" @show-details="showDetail" v-if="!showError" />
+  <ListView :shows="shows" @show-details="showDetail" v-if="!showError && shows.length > 0" />
 </template>
 <script>
 import ListView from "../components/ListView.vue";
 import ErrorView from "../components/ErrorView.vue";
 import * as CONST from '../App.constants.js'
 export default {
-  name: "Home",
+  name: "SearchResult",
   components: {
     ListView,
     ErrorView,
@@ -15,10 +15,10 @@ export default {
   methods: {
     showDetail(id) {
       console.log("check id", id);
-      this.$router.push({ name: 'show', params: { id: id } })
+      this.$router.push({ name: "show", params: { id: id } });
     },
-    fetchTVShows() {
-      fetch(`${CONST.URL.SHOW}?page=1`)
+    searchTvShow(id) {
+      fetch(`${CONST.URL.SEARCH}?q=${id}`)
         .then(async (response) => {
           this.showError = false;
           const data = await response.json();
@@ -30,7 +30,8 @@ export default {
             return Promise.reject(error);
           }
           if (data && data.length > 0) {
-            this.shows = data;
+            this.shows = data.map((i) => i.show);
+            
           }
         })
         .catch((error) => {
@@ -41,7 +42,8 @@ export default {
     },
   },
   created() {
-    this.fetchTVShows();
+    console.log("check route search result", this.$route.params.searchText);
+    this.searchTvShow(this.$route.params.searchText);
   },
   data() {
     return {

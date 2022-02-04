@@ -11,9 +11,7 @@ export default {
   name: "App",
   components: {
     Header,
-    // ListView,
     Footer,
-    // ErrorView,
   },
   methods: {
     showDetail(id) {
@@ -21,29 +19,7 @@ export default {
     },
     submitSearch(id) {
       console.log("check submit", id);
-      this.searchTvShow(id);
-    },
-    searchTvShow(id) {
-     fetch(` https://api.tvmaze.com/search/shows?q=${id}`)
-        .then(async (response) => {
-          this.showError = false;
-          const data = await response.json();
-          console.log("response", data);
-          // check for error response //but these are not available in our API
-          if (!response.ok) {
-            // get error message from body or default to response statusText
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
-          }
-          if (data && data.length > 0) {
-            this.shows = data.map(i=>i.show);
-          }
-        })
-        .catch((error) => {
-          this.errorMessage = error;
-          this.showError = true;
-          console.error("There was an error!", error);
-        });
+      this.$router.push({ name: "search", params: { searchText: id } });
     },
   }
 };
@@ -54,7 +30,7 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /* text-align: center; */
   color: #2c3e50;
 }
 </style>

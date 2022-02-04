@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand">{{ title }}</a>
+      <router-link class="navbar-brand" to="/">{{ title }}</router-link>
       <Search :btn="true" @submit-search="submitSearch" />
     </div>
   </nav>
