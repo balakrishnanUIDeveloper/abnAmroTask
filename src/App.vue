@@ -20,8 +20,9 @@ export default {
     submitSearch(id) {
       console.log("check submit", id);
       this.$router.push({ name: "search", params: { searchText: id } });
-    },
-  }
+    }
+  },
+  created() {},
 };
 </script>
 

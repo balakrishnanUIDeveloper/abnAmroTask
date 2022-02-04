@@ -5,7 +5,7 @@
 <script>
 import ListView from "../components/ListView.vue";
 import ErrorView from "../components/ErrorView.vue";
-import * as CONST from '../App.constants.js'
+import * as CONST from "../App.constants.js";
 export default {
   name: "Home",
   components: {
@@ -15,10 +15,17 @@ export default {
   methods: {
     showDetail(id) {
       console.log("check id", id);
-      this.$router.push({ name: 'show', params: { id: id } })
+      this.$router.push({ name: "show", params: { id: id } });
     },
     fetchTVShows() {
-      fetch(`${CONST.URL.SHOW}?page=1`)
+      this.$store.dispatch("actionA").then((pageNo) => {
+        // ... given a state management provision for future use of pagination
+        console.log("dispatch", pageNo);
+        this.fetchTvShowWithPage(pageNo)
+      });
+    },
+    fetchTvShowWithPage(page) {
+      fetch(`${CONST.URL.SHOW}?page=${page}`)
         .then(async (response) => {
           this.showError = false;
           const data = await response.json();
