@@ -3,13 +3,13 @@ import Footer from '@/components/Footer.vue'
 
 describe('Footer.vue', () => {
     it('renders props.title when passed', () => {
-        const msg = 'new message'
+        const msg = 'Footer Text'
         const wrapper = shallowMount(Footer, {
             propsData: {
-                footerText: 'Footer Text'
+                footerText: msg
             }
         })
         let text = wrapper.find('.h6')
-        expect(text.text()).toEqual("Footer Text");
+        expect(text.text()).toEqual(msg);
     })
 })

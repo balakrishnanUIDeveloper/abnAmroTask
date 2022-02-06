@@ -3,13 +3,13 @@ import Header from '@/components/Header.vue'
 
 describe('Header.vue', () => {
     it('renders props.title when passed', () => {
-        const msg = 'new message'
+        const msg = 'Header text';
         const wrapper = shallowMount(Header, {
             propsData: {
-                title: 'Header text'
+                title: msg
             }
         })
         let text = wrapper.find('.navbar-brand')
-        expect(text.text()).toEqual("Header text");
+        expect(text.text()).toEqual(msg);
     })
 })

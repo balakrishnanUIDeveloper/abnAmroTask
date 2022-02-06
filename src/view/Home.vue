@@ -1,5 +1,4 @@
 <template>
-<h1>Hi</h1>
   <ErrorView :error="errorMessage" v-if="showError" />
   <ListView :shows="shows" @show-details="showDetail" v-if="!showError && shows.length > 0" />
 </template>
