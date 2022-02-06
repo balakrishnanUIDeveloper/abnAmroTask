@@ -19,6 +19,13 @@ npm run build
 ```
 npm run lint
 ```
+## Front end 
+built based on Bootstrap 5 for responsive web design. CSS is added in index.html file
+
+### Unit testing
+```
+npm run test
+```
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
