@@ -1,4 +1,8 @@
 # tv-show-app
+Vue Version 3
+Routing: Vue-router
+Test setup : Jest and Vue test Util
+API : http://www.tvmaze.com/api
 
 ## Project setup
 ```
