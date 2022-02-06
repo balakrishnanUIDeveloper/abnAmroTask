@@ -1,6 +1,7 @@
 <template>
+<h1>Hi</h1>
   <ErrorView :error="errorMessage" v-if="showError" />
-  <ListView :shows="shows" @show-details="showDetail" v-if="!showError" />
+  <ListView :shows="shows" @show-details="showDetail" v-if="!showError && shows.length > 0" />
 </template>
 <script>
 import ListView from "../components/ListView.vue";
@@ -14,23 +15,25 @@ export default {
   },
   methods: {
     showDetail(id) {
-      console.log("check id", id);
+      // console.log("check id", id);
       this.$router.push({ name: "show", params: { id: id } });
     },
     fetchTVShows(nextPage = false) {
       this.$store.dispatch("actionA").then((pageNo) => {
         // ... given a state management provision for future use of pagination
-        console.log("dispatch", pageNo);
+        // console.log("dispatch", pageNo);
         this.fetchTvShowWithPage(pageNo, nextPage);
       });
     },
+    apiData(page){
+      return fetch(`${CONST.URL.SHOW}?page=${page}`)
+    },
     fetchTvShowWithPage(page, checkNextPage) {
       let that = this;
-      fetch(`${CONST.URL.SHOW}?page=${page}`)
-        .then(async (response) => {
+        this.apiData(page).then(async (response) => {
           this.showError = false;
           const data = await response.json();
-          console.log("response", data);
+          // console.log("response", data);
           // check for error response //but these are not available in our API
           if (!response.ok) {
             // get error message from body or default to response statusText
