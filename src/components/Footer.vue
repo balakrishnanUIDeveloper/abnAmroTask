@@ -1,13 +1,16 @@
 <template>
-    <footer class="footer mt-auto py-3 bg-light">
+    <footer class="footer mt-auto py-3 bg-light text-center">
         <div class="container">
-            <span class="text-muted">By using this site you agree to and accept our User Agreement, which can be read here.</span>
+            <span class="text-muted h6">{{footerText}}</span>
         </div>
     </footer>
 </template>
 <script>
 export default {
-    name:'Footer'
+    name:'Footer',
+    props:[
+        'footerText'
+    ]
 }
 </script>
 <style>

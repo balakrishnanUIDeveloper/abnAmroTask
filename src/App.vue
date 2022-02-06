@@ -1,7 +1,7 @@
 <template>
   <Header @submit-search="submitSearch" title="TV SHOWS" />
   <router-view></router-view>
-  <Footer />
+  <Footer footerText="By using this site you agree to and accept our User Agreement, which can be read here." />
 </template>
 
 <script>
